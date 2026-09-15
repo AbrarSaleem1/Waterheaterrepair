@@ -342,6 +342,20 @@ const serviceSchema = {
     grid-template-columns: 1fr 340px;
     gap: var(--space-10);
     align-items: flex-start;
+    min-width: 0;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .service-main {
+    min-width: 0;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .service-layout > * {
+    min-width: 0;
+    max-width: 100%;
   }
 
   .service-lead {
@@ -589,7 +603,11 @@ const serviceSchema = {
 
   @media (max-width: 900px) {
     .service-layout {
-      grid-template-columns: 1fr;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 100%;
+      gap: var(--space-8);
     }
   }
 </style>

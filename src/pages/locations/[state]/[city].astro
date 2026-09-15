@@ -481,6 +481,20 @@ const faqSchema = {
     grid-template-columns: 1fr 340px;
     gap: var(--space-10);
     align-items: flex-start;
+    min-width: 0;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .city-main-content {
+    min-width: 0;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .city-layout > * {
+    min-width: 0;
+    max-width: 100%;
   }
 
   .city-lead-p {
@@ -659,15 +673,21 @@ const faqSchema = {
   /* Diagnostic Matrix */
   .diagnostic-card {
     margin-block: var(--space-6);
+    overflow: hidden;
+    max-width: 100%;
   }
 
   .table-responsive {
+    width: 100%;
+    max-width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    display: block;
   }
 
   .diag-table {
     width: 100%;
+    min-width: 520px;
     border-collapse: collapse;
     font-size: var(--text-xs);
     text-align: left;
@@ -970,7 +990,11 @@ const faqSchema = {
 
   @media (max-width: 900px) {
     .city-layout {
-      grid-template-columns: 1fr;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 100%;
+      gap: var(--space-8);
     }
 
     .pricing-grid,
