@@ -45,6 +45,35 @@ for (const state of statesList) {
   stateByAbbr.set(state.abbr, info);
 }
 
+// Pre-index cities by state for instant O(1) lookups
+const citiesByState = new Map<string, CityInfo[]>();
+
+for (const raw of coverageData.cities) {
+  const state = stateByAbbr.get(raw.state);
+  if (!state) continue;
+
+  let list = citiesByState.get(raw.state);
+  if (!list) {
+    list = [];
+    citiesByState.set(raw.state, list);
+  }
+
+  list.push({
+    name: raw.city,
+    slug: slugify(raw.city),
+    stateAbbr: raw.state,
+    stateName: state.name,
+    stateSlug: state.slug,
+    zips: raw.zips,
+    topPayout: raw.top_payout,
+  });
+}
+
+// Sort each state's cities by topPayout descending once
+for (const [_, list] of citiesByState) {
+  list.sort((a, b) => b.topPayout - a.topPayout);
+}
+
 export function getAllStates(): StateInfo[] {
   return Array.from(stateMap.values());
 }
@@ -54,25 +83,11 @@ export function getStateBySlug(slug: string): StateInfo | undefined {
 }
 
 export function getCitiesForState(stateAbbr: string): CityInfo[] {
-  const state = stateByAbbr.get(stateAbbr);
-  if (!state) return [];
-
-  const rawCities = coverageData.cities.filter(c => c.state === stateAbbr);
-  
-  return rawCities.map(c => ({
-    name: c.city,
-    slug: slugify(c.city),
-    stateAbbr: c.state,
-    stateName: state.name,
-    stateSlug: state.slug,
-    zips: c.zips,
-    topPayout: c.top_payout,
-  }));
+  return citiesByState.get(stateAbbr) || [];
 }
 
 export function getTopCitiesForState(stateAbbr: string, limit = 24): CityInfo[] {
-  const cities = getCitiesForState(stateAbbr);
-  return cities
-    .sort((a, b) => b.topPayout - a.topPayout)
-    .slice(0, limit);
+  const cities = citiesByState.get(stateAbbr) || [];
+  return cities.slice(0, limit);
 }
+

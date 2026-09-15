@@ -29,9 +29,11 @@ export async function getStaticPaths() {
     // Generate all unique cities in the dataset so no city ever 404s
     const targetCities = uniqueCities;
 
+    const first7 = targetCities.slice(0, 7);
+
     for (const city of targetCities) {
-      // Find 6 sister cities in the same state for internal linking
-      const sisterCities = targetCities
+      // Fast sister cities lookup from top candidates
+      const sisterCities = first7
         .filter(c => c.slug !== city.slug)
         .slice(0, 6);
 
@@ -980,4 +982,38 @@ const faqSchema = {
       grid-template-columns: 1fr;
     }
   }
+
+  @media (max-width: 640px) {
+    .emergency-bar-inner {
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--space-3);
+      text-align: left;
+    }
+
+    .emergency-bar-inner .btn {
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+    }
+
+    .profile-stats-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+    }
+
+    .profile-header {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+
+    .code-header {
+      align-items: flex-start;
+    }
+
+    .city-lead-p {
+      font-size: var(--text-base);
+    }
+  }
 </style>
+
