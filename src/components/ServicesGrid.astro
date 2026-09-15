@@ -1,0 +1,102 @@
+---
+import services from '../data/services.json';
+
+export interface Props {
+  featured?: string[];
+  showAll?: boolean;
+  compact?: boolean;
+}
+
+const { featured, showAll = true, compact = false } = Astro.props;
+
+const displayServices = featured
+  ? services.filter(s => featured.includes(s.id))
+  : services;
+
+const iconMap: Record<string, string> = {
+  zap: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+  flame: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>',
+  droplets: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 14.06c1.74 0 3.15-1.44 3.15-3.19 0-.91-.45-1.78-1.34-2.51-.9-.74-1.47-1.63-1.81-2.86-.34 1.23-.91 2.12-1.81 2.86-.89.73-1.34 1.6-1.34 2.51 0 1.75 1.41 3.19 3.15 3.19z"/><path d="M17.5 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S17.79 6.75 17.5 5.3c-.29 1.45-1.14 2.84-2.29 3.76S13.5 11.1 13.5 12.25c0 2.22 1.8 4.05 4 4.05z"/></svg>',
+  refresh: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>',
+  building: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>',
+};
+---
+
+<div class:list={["services-grid", { "services-grid-compact": compact }]}>
+  {displayServices.map((service) => (
+    <a href={`/services/${service.slug}/`} class="service-card card">
+      <div class="card-body">
+        <div class="service-icon icon-circle" set:html={iconMap[service.icon] || iconMap.zap} />
+        <h3 class="service-name">{compact ? service.shortName : service.name}</h3>
+        {!compact && <p class="service-desc">{service.shortDescription}</p>}
+        <span class="service-link">
+          Learn More
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </div>
+    </a>
+  ))}
+</div>
+
+<style>
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+
+  .services-grid-compact {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .service-card {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .service-card .card-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .service-name {
+    font-size: var(--text-lg);
+    color: var(--color-navy);
+  }
+
+  .service-desc {
+    font-size: var(--text-sm);
+    color: var(--color-charcoal-light);
+    line-height: var(--leading-relaxed);
+    margin: 0;
+  }
+
+  .service-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-orange);
+    margin-top: auto;
+    transition: gap var(--transition-fast);
+  }
+
+  .service-card:hover .service-link {
+    gap: var(--space-2);
+  }
+
+  @media (max-width: 768px) {
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .services-grid,
+    .services-grid-compact {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

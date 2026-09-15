@@ -1,0 +1,290 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import ServicesGrid from '../../components/ServicesGrid.astro';
+import TrustStrip from '../../components/TrustStrip.astro';
+import siteConfig from '../../data/site-config.json';
+import services from '../../data/services.json';
+
+const serviceComparison = [
+  {
+    feature: 'Average Lifespan',
+    electric: '10 - 15 Years',
+    gas: '8 - 12 Years',
+    tankless: '15 - 20+ Years'
+  },
+  {
+    feature: 'Energy Efficiency',
+    electric: 'High (0.90 - 0.95 UEF)',
+    gas: 'Moderate to High (0.60 - 0.82 UEF)',
+    tankless: 'Very High (0.82 - 0.98 UEF)'
+  },
+  {
+    feature: 'Operating Cost',
+    electric: 'Moderate (Depends on electric rates)',
+    gas: 'Lower in most regions',
+    tankless: 'Lowest ongoing utility cost'
+  },
+  {
+    feature: 'Hot Water Output',
+    electric: 'Stored 40 - 80 Gallons',
+    gas: 'Fast recovery rate',
+    tankless: 'Continuous, endless supply'
+  },
+  {
+    feature: 'Common Repairs',
+    electric: 'Elements, thermostats, breaker',
+    gas: 'Pilot, thermocouple, control valve',
+    tankless: 'Mineral scale, flow sensor, venting'
+  }
+];
+
+const serviceFaqs = [
+  {
+    q: 'How do I know what size water heater my home needs?',
+    a: 'For tank water heaters, homes with 1-2 people usually need 30-40 gallons, 3-4 people need 40-50 gallons, and 5+ people require 50-80 gallons. For tankless units, sizing is based on flow rate (Gallons Per Minute, GPM) and temperature rise.'
+  },
+  {
+    q: 'How long does a typical water heater repair take?',
+    a: 'Most minor repairs (replacing an electric element, thermocouple, thermostat, or pressure relief valve) take between 1 to 2 hours. Our technicians carry standard replacement parts directly on their trucks.'
+  },
+  {
+    q: 'Can I convert my traditional tank water heater to a tankless unit?',
+    a: 'Yes! Converting to tankless requires evaluating your gas line capacity or electrical breaker panel, proper venting, and water line routing. Our plumbers provide a comprehensive on-site assessment.'
+  },
+  {
+    q: 'What is included in a routine water heater maintenance service?',
+    a: 'A standard tune-up includes flushing tank sediment, inspecting and testing the sacrificial anode rod, testing the temperature and pressure (T&P) relief valve, checking electrical connections or gas burner assemblies, and testing water temperature.'
+  }
+];
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Services' }
+];
+
+const servicesSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Water Heater Repair and Installation Services",
+  "provider": {
+    "@type": "PlumbingService",
+    "name": siteConfig.businessName,
+    "telephone": siteConfig.phone,
+    "url": siteConfig.domain
+  },
+  "areaServed": "United States",
+  "description": "Professional repair, maintenance, replacement, and installation for electric, gas, tankless, and commercial water heaters."
+};
+---
+
+<BaseLayout
+  title={`Our Water Heater Services — Repair, Replacement & Installation | ${siteConfig.businessName}`}
+  description="Explore comprehensive water heater services by HotWater Rescue: electric, gas, and tankless repair, system replacements, and commercial plumbing. 24/7 emergency service."
+  breadcrumbs={breadcrumbs}
+  jsonLd={servicesSchema}
+>
+  <Hero
+    title="Comprehensive Water Heater Services"
+    subtitle="From rapid diagnostics to full-system replacements, our certified technicians ensure dependable hot water for homes and businesses nationwide."
+    breadcrumbs={breadcrumbs}
+    variant="short"
+  />
+
+  <TrustStrip />
+
+  <!-- Services Grid Section -->
+  <section class="section">
+    <div class="container">
+      <div class="text-center">
+        <span class="badge badge-navy">Specialized Solutions</span>
+        <h2 class="section-title">All Water Heater Repair & Installation Services</h2>
+        <p class="section-subtitle">
+          Click on any service below to learn about common symptoms, diagnostic procedures, repair vs replacement advice, and pricing.
+        </p>
+      </div>
+
+      <ServicesGrid />
+    </div>
+  </section>
+
+  <!-- Comparison Table Section -->
+  <section class="section" style="background-color: var(--color-white);">
+    <div class="container">
+      <div class="text-center">
+        <span class="badge badge-orange">Buyer & Homeowner Guide</span>
+        <h2 class="section-title">Water Heater System Comparison</h2>
+        <p class="section-subtitle">
+          Deciding between electric, gas, or tankless? Review the key differences below or call our specialists for personalized advice.
+        </p>
+      </div>
+
+      <div class="table-container card">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Electric Tank</th>
+              <th>Gas Tank</th>
+              <th>Tankless (On-Demand)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {serviceComparison.map((row) => (
+              <tr>
+                <td><strong>{row.feature}</strong></td>
+                <td>{row.electric}</td>
+                <td>{row.gas}</td>
+                <td>{row.tankless}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="section">
+    <div class="container container-narrow">
+      <div class="text-center">
+        <span class="badge badge-navy">Common Questions</span>
+        <h2 class="section-title">Services FAQs</h2>
+        <p class="section-subtitle">
+          Got questions about repairs, installation times, or costs? Here are answers to our most frequently asked questions.
+        </p>
+      </div>
+
+      <div class="faq-list">
+        {serviceFaqs.map((faq, index) => (
+          <details class="faq-item card" open={index === 0}>
+            <summary class="faq-question">
+              <span>{faq.q}</span>
+              <span class="faq-arrow">+</span>
+            </summary>
+            <div class="faq-answer">
+              <p>{faq.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="cta-band">
+    <div class="container cta-band-inner text-center">
+      <h2>Need Help Choosing the Right Service?</h2>
+      <p>Speak directly with our technical support team for troubleshooting advice and upfront phone estimates.</p>
+      <div class="cta-band-actions">
+        <a href={`tel:${siteConfig.phone}`} class="btn btn-primary btn-lg">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Call {siteConfig.phoneFormatted}
+        </a>
+        <a href="/contact-us/" class="btn btn-secondary btn-lg">Request an Estimate</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .table-container {
+    overflow-x: auto;
+    margin-top: var(--space-6);
+  }
+
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
+
+  .comparison-table th {
+    background-color: var(--color-navy);
+    color: var(--color-white);
+    padding: var(--space-4) var(--space-5);
+    font-family: var(--font-heading);
+    font-weight: 600;
+  }
+
+  .comparison-table td {
+    padding: var(--space-4) var(--space-5);
+    border-bottom: 1px solid var(--color-gray-200);
+    font-size: var(--text-sm);
+  }
+
+  .comparison-table tr:nth-child(even) {
+    background-color: var(--color-gray-50);
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .faq-item {
+    cursor: pointer;
+  }
+
+  .faq-question {
+    padding: var(--space-5) var(--space-6);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: var(--text-lg);
+    color: var(--color-navy);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-arrow {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--color-orange);
+    transition: transform var(--transition-fast);
+  }
+
+  details[open] .faq-arrow {
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    padding: 0 var(--space-6) var(--space-6);
+    color: var(--color-charcoal-light);
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+  }
+
+  .cta-band {
+    background: var(--color-navy);
+    color: var(--color-white);
+    padding-block: var(--space-20);
+  }
+
+  .cta-band h2 {
+    color: var(--color-white);
+    font-size: var(--text-4xl);
+    margin-bottom: var(--space-3);
+  }
+
+  .cta-band p {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: var(--text-lg);
+    max-width: 600px;
+    margin-inline: auto;
+    margin-bottom: var(--space-8);
+  }
+
+  .cta-band-actions {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+</style>

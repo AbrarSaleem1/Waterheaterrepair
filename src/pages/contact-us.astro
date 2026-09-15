@@ -1,0 +1,495 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import TrustStrip from '../components/TrustStrip.astro';
+import siteConfig from '../data/site-config.json';
+import services from '../data/services.json';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Contact Us' }
+];
+
+const contactSchema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": `Contact ${siteConfig.businessName}`,
+  "description": `Get in touch with ${siteConfig.businessName} for 24/7 water heater repair, upfront phone estimates, and emergency dispatch.`,
+  "mainEntity": {
+    "@type": "PlumbingService",
+    "name": siteConfig.businessName,
+    "telephone": siteConfig.phone,
+    "email": siteConfig.email,
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": siteConfig.address.street,
+      "addressLocality": siteConfig.address.city,
+      "addressRegion": siteConfig.address.state,
+      "postalCode": siteConfig.address.zip,
+      "addressCountry": siteConfig.address.country
+    }
+  }
+};
+---
+
+<BaseLayout
+  title={`Contact Us — 24/7 Emergency Dispatch & Phone Estimates | ${siteConfig.businessName}`}
+  description={`Call ${siteConfig.phoneFormatted} 24/7 for immediate water heater emergency dispatch and upfront phone estimates. Licensed plumbers standing by nationwide.`}
+  breadcrumbs={breadcrumbs}
+  jsonLd={contactSchema}
+>
+  <Hero
+    title="24/7 Water Heater Dispatch Desk"
+    subtitle="Direct line to licensed water heater specialists. No slow forms, no waiting for callbacks — speak directly with our on-call dispatchers right now."
+    breadcrumbs={breadcrumbs}
+    variant="short"
+  />
+
+  <TrustStrip />
+
+  <!-- Direct Call-to-Action Hero Section -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-dispatch-container">
+        
+        <!-- Left: High Conversion Direct Action Box -->
+        <div class="card dispatch-main-card">
+          <div class="card-body">
+            <div class="dispatch-header">
+              <span class="live-pulse-badge">
+                <span class="live-dot"></span>
+                DISPATCHERS ON DUTY NOW
+              </span>
+              <span class="badge badge-orange">Average Wait: Under 30 Seconds</span>
+            </div>
+
+            <h2 class="dispatch-title">Call Now for Immediate Dispatch & Phone Estimate</h2>
+            <p class="dispatch-desc">
+              Whether you are experiencing an active flood from a leaking tank, hearing aggressive popping sounds, or stepped into an icy cold shower, our master plumbers provide upfront estimates directly over the phone and dispatch local trucks immediately.
+            </p>
+
+            <!-- Primary Phone CTA Button -->
+            <div class="phone-cta-wrapper">
+              <a href={`tel:${siteConfig.phone}`} class="btn btn-call-huge">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="cta-phone-icon">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+                <div class="btn-call-content">
+                  <span class="btn-call-sub">TAP TO CALL 24/7 HOTLINE</span>
+                  <span class="btn-call-number">{siteConfig.phoneFormatted}</span>
+                </div>
+              </a>
+            </div>
+
+            <!-- Emergency Guarantee Badges -->
+            <div class="guarantee-grid">
+              <div class="guarantee-item">
+                <span class="g-icon">⚡</span>
+                <div>
+                  <strong>45–75 Min Response</strong>
+                  <span>Rapid local truck arrival</span>
+                </div>
+              </div>
+              <div class="guarantee-item">
+                <span class="g-icon">📞</span>
+                <div>
+                  <strong>Phone Estimates</strong>
+                  <span>Upfront pricing clarity</span>
+                </div>
+              </div>
+              <div class="guarantee-item">
+                <span class="g-icon">🛡️</span>
+                <div>
+                  <strong>Licensed & Insured</strong>
+                  <span>Certified master plumbers</span>
+                </div>
+              </div>
+              <div class="guarantee-item">
+                <span class="g-icon">🔧</span>
+                <div>
+                  <strong>Full Stock Trucks</strong>
+                  <span>95% fixed on first visit</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step-by-Step Call Protocol -->
+            <div class="dispatch-steps-box">
+              <h3 class="steps-heading">What Happens When You Call Us?</h3>
+              <div class="steps-flow">
+                <div class="flow-step">
+                  <div class="step-num">1</div>
+                  <div class="step-info">
+                    <strong>Direct Connection</strong>
+                    <p>You speak directly with an experienced plumbing coordinator, not a robot or offshore call center.</p>
+                  </div>
+                </div>
+
+                <div class="flow-step">
+                  <div class="step-num">2</div>
+                  <div class="step-info">
+                    <strong>Quick Diagnostic & Phone Estimate</strong>
+                    <p>We ask 3 quick questions (tank fuel type, age, symptoms) and calculate an upfront estimate right on the call.</p>
+                  </div>
+                </div>
+
+                <div class="flow-step">
+                  <div class="step-num">3</div>
+                  <div class="step-info">
+                    <strong>Immediate Dispatch</strong>
+                    <p>The nearest mobile workshop is routed to your address with all required heating elements, gas valves, or replacement tanks.</p>
+                  </div>
+                </div>
+
+                <div class="flow-step">
+                  <div class="step-num">4</div>
+                  <div class="step-info">
+                    <strong>Guaranteed Repair</strong>
+                    <p>The technician inspects on-site, confirms the scope in writing, and gets your hot water running with full warranty coverage.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Right: Headquarters & Quick Facts Sidebar -->
+        <div class="contact-info-sidebar">
+          
+          <!-- Urgent Situation Callout -->
+          <div class="card callout-highlight card-body text-center">
+            <span class="badge badge-red">Active Water Leak?</span>
+            <h3 style="margin-block: var(--space-2);">Shut Off Water First!</h3>
+            <p style="font-size: var(--text-sm); margin-bottom: var(--space-4);">
+              Turn the cold water valve clockwise on top of the tank to stop incoming water pressure, then dial our emergency line immediately:
+            </p>
+            <a href={`tel:${siteConfig.phone}`} class="btn btn-secondary btn-lg" style="width: 100%;">
+              Emergency Call: {siteConfig.phoneFormatted}
+            </a>
+          </div>
+
+          <!-- Headquarters Details -->
+          <div class="card card-body" style="margin-top: var(--space-6);">
+            <h4>National Operations Office</h4>
+            
+            <div class="info-item">
+              <span class="info-icon">🏢</span>
+              <div>
+                <strong>Physical Address:</strong>
+                <p>{siteConfig.address.full}</p>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <span class="info-icon">✉️</span>
+              <div>
+                <strong>Administrative Inquiries:</strong>
+                <p><a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></p>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <span class="info-icon">⏰</span>
+              <div>
+                <strong>Operating Hours:</strong>
+                <p>24 Hours a Day, 7 Days a Week, 365 Days a Year</p>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <span class="info-icon">🗺️</span>
+              <div>
+                <strong>Coverage Footprint:</strong>
+                <p>All 50 US States & Over 14,000 Municipalities</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Services Available on Call -->
+          <div class="card card-body" style="margin-top: var(--space-6);">
+            <h4>Services Available For Dispatch</h4>
+            <ul class="services-call-list">
+              {services.map((svc) => (
+                <li>
+                  <a href={`/services/${svc.slug}/`}>✓ {svc.name}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .cta-dispatch-container {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: var(--space-10);
+    align-items: flex-start;
+  }
+
+  .dispatch-main-card {
+    border-top: 4px solid var(--color-orange);
+  }
+
+  .dispatch-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+
+  .live-pulse-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #e6f7ed;
+    color: #0d8244;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .live-dot {
+    width: 8px;
+    height: 8px;
+    background: #0d8244;
+    border-radius: 50%;
+    animation: pulseGlow 1.8s infinite;
+  }
+
+  @keyframes pulseGlow {
+    0% { transform: scale(0.95); opacity: 0.7; box-shadow: 0 0 0 0 rgba(13, 130, 68, 0.7); }
+    70% { transform: scale(1.15); opacity: 1; box-shadow: 0 0 0 8px rgba(13, 130, 68, 0); }
+    100% { transform: scale(0.95); opacity: 0.7; box-shadow: 0 0 0 0 rgba(13, 130, 68, 0); }
+  }
+
+  .dispatch-title {
+    font-size: var(--text-3xl);
+    font-family: var(--font-display);
+    color: var(--color-navy);
+    line-height: 1.25;
+    margin-bottom: var(--space-3);
+  }
+
+  .dispatch-desc {
+    font-size: var(--text-base);
+    color: var(--color-charcoal-light);
+    line-height: 1.6;
+    margin-bottom: var(--space-6);
+  }
+
+  .phone-cta-wrapper {
+    margin-bottom: var(--space-8);
+  }
+
+  .btn-call-huge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    background: linear-gradient(135deg, var(--color-orange) 0%, #D84315 100%);
+    color: #fff;
+    padding: var(--space-5) var(--space-8);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 10px 25px -5px rgba(230, 81, 0, 0.4);
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .btn-call-huge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px -5px rgba(230, 81, 0, 0.55);
+    color: #fff;
+  }
+
+  .cta-phone-icon {
+    flex-shrink: 0;
+    animation: ringWiggle 2.5s infinite;
+  }
+
+  @keyframes ringWiggle {
+    0%, 100% { transform: rotate(0deg); }
+    10%, 30% { transform: rotate(-10deg); }
+    20%, 40% { transform: rotate(10deg); }
+    50% { transform: rotate(0deg); }
+  }
+
+  .btn-call-content {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .btn-call-sub {
+    font-size: var(--text-xs);
+    letter-spacing: 1px;
+    font-weight: 700;
+    opacity: 0.9;
+  }
+
+  .btn-call-number {
+    font-size: var(--text-2xl);
+    font-weight: 800;
+    font-family: var(--font-display);
+    line-height: 1.1;
+  }
+
+  .guarantee-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+    padding: var(--space-4);
+    background: var(--color-gray-50);
+    border-radius: var(--radius-md);
+  }
+
+  .guarantee-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .g-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .guarantee-item strong {
+    font-size: var(--text-sm);
+    color: var(--color-navy);
+    display: block;
+  }
+
+  .guarantee-item span {
+    font-size: var(--text-xs);
+    color: var(--color-charcoal-light);
+  }
+
+  .dispatch-steps-box {
+    border-top: 1px solid var(--color-gray-200);
+    padding-top: var(--space-6);
+  }
+
+  .steps-heading {
+    font-size: var(--text-lg);
+    color: var(--color-navy);
+    margin-bottom: var(--space-4);
+  }
+
+  .steps-flow {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .flow-step {
+    display: flex;
+    gap: var(--space-4);
+    align-items: flex-start;
+  }
+
+  .step-num {
+    width: 32px;
+    height: 32px;
+    background: var(--color-navy);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: var(--text-sm);
+    flex-shrink: 0;
+  }
+
+  .step-info strong {
+    font-size: var(--text-sm);
+    color: var(--color-navy);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .step-info p {
+    font-size: var(--text-xs);
+    color: var(--color-charcoal-light);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .callout-highlight {
+    background: #FFF3E0;
+    border: 2px solid var(--color-orange);
+  }
+
+  .info-item {
+    display: flex;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+  }
+
+  .info-icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+
+  .info-item strong {
+    font-size: var(--text-sm);
+    color: var(--color-navy);
+    display: block;
+  }
+
+  .info-item p {
+    font-size: var(--text-sm);
+    color: var(--color-charcoal-light);
+    margin: 0;
+  }
+
+  .info-item a {
+    color: var(--color-navy);
+    text-decoration: underline;
+  }
+
+  .services-call-list {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-3) 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .services-call-list li a {
+    font-size: var(--text-sm);
+    color: var(--color-charcoal);
+    text-decoration: none;
+    display: block;
+    padding: 4px 0;
+    transition: color 0.2s;
+  }
+
+  .services-call-list li a:hover {
+    color: var(--color-orange);
+    text-decoration: underline;
+  }
+
+  @media (max-width: 900px) {
+    .cta-dispatch-container {
+      grid-template-columns: 1fr;
+    }
+
+    .guarantee-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

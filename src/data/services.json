@@ -1,0 +1,52 @@
+[
+  {
+    "id": "electric-water-heater-repair",
+    "name": "Electric Water Heater Repair & Maintenance",
+    "slug": "electric-water-heater-repair",
+    "shortName": "Electric Water Heater Repair",
+    "icon": "zap",
+    "shortDescription": "Fast diagnosis and repair for all electric water heater models, from heating element failures to thermostat issues.",
+    "metaTitle": "Electric Water Heater Repair & Maintenance | HotWater Rescue",
+    "metaDescription": "Professional electric water heater repair and maintenance services. We fix heating element failures, thermostat problems, and more. 24/7 emergency service available."
+  },
+  {
+    "id": "gas-water-heater-repair",
+    "name": "Gas Water Heater Repair & Service",
+    "slug": "gas-water-heater-repair",
+    "shortName": "Gas Water Heater Repair",
+    "icon": "flame",
+    "shortDescription": "Licensed gas water heater technicians handling pilot light problems, burner repairs, and gas valve replacements safely.",
+    "metaTitle": "Gas Water Heater Repair & Service | HotWater Rescue",
+    "metaDescription": "Licensed gas water heater repair and service from certified technicians. Pilot light fixes, burner repairs, gas valve replacement. Available 24/7 nationwide."
+  },
+  {
+    "id": "tankless-water-heater-installation",
+    "name": "Tankless Water Heater Installation & Service",
+    "slug": "tankless-water-heater-installation",
+    "shortName": "Tankless Water Heater Service",
+    "icon": "droplets",
+    "shortDescription": "Professional tankless water heater installation, descaling, and repair for both gas and electric on-demand units.",
+    "metaTitle": "Tankless Water Heater Installation & Service | HotWater Rescue",
+    "metaDescription": "Expert tankless water heater installation and service. Gas and electric on-demand units. Descaling, repair, and new installations. Call for an estimate."
+  },
+  {
+    "id": "water-heater-replacement",
+    "name": "Water Heater Replacement & Installation",
+    "slug": "water-heater-replacement",
+    "shortName": "Water Heater Replacement",
+    "icon": "refresh",
+    "shortDescription": "Full water heater replacement with professional installation, proper disposal of the old unit, and code-compliant setup.",
+    "metaTitle": "Water Heater Replacement & Installation | HotWater Rescue",
+    "metaDescription": "Complete water heater replacement and new installation services. We remove the old unit, install the new one to code, and handle all permits. Call for an estimate."
+  },
+  {
+    "id": "commercial-water-heater-services",
+    "name": "Commercial Water Heater Services",
+    "slug": "commercial-water-heater-services",
+    "shortName": "Commercial Water Heater Services",
+    "icon": "building",
+    "shortDescription": "Commercial-grade water heater installation, repair, and maintenance for restaurants, hotels, offices, and multi-family buildings.",
+    "metaTitle": "Commercial Water Heater Services | HotWater Rescue",
+    "metaDescription": "Commercial water heater installation, repair, and maintenance. We service restaurants, hotels, offices, and multi-family buildings. 24/7 emergency response."
+  }
+]

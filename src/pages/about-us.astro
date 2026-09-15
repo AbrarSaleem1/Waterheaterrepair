@@ -1,0 +1,265 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import TrustStrip from '../components/TrustStrip.astro';
+import siteConfig from '../data/site-config.json';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'About Us' }
+];
+
+const aboutSchema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": `About ${siteConfig.businessName}`,
+  "description": `Learn about ${siteConfig.businessName}, providing licensed water heater repair and installation services across the United States.`,
+  "publisher": {
+    "@type": "Organization",
+    "name": siteConfig.businessName,
+    "url": siteConfig.domain,
+    "telephone": siteConfig.phone
+  }
+};
+---
+
+<BaseLayout
+  title={`About Us — Certified Water Heater Specialists | ${siteConfig.businessName}`}
+  description={`Learn how ${siteConfig.businessName} became America's trusted water heater repair network. 24/7 emergency response, licensed plumbers, and upfront pricing in all 50 states.`}
+  breadcrumbs={breadcrumbs}
+  jsonLd={aboutSchema}
+>
+  <Hero
+    title="About HotWater Rescue"
+    subtitle="Founded with a single mission: restoring hot water to American families fast, safely, and with complete price transparency."
+    breadcrumbs={breadcrumbs}
+    variant="short"
+  />
+
+  <TrustStrip />
+
+  <!-- Our Story Section -->
+  <section class="section">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text">
+          <span class="badge badge-navy">Our Mission</span>
+          <h2>Hot Water Isn't a Luxury — It's an Essential Household Need</h2>
+          <p class="lead-text">
+            When your water heater stops working, basic daily routines stop with it. From morning showers and baby baths to sanitizing dishes and washing clothes, hot water is fundamental to comfort and hygiene.
+          </p>
+          <p>
+            Founded in {siteConfig.foundedYear}, {siteConfig.businessName} was created to eliminate the frustration, long wait times, and surprise fees that homeowners so often face when their heating units fail. Headquartered at {siteConfig.address.full}, our dedicated network connects homeowners with top-rated, licensed, and insured plumbing contractors across all 50 states.
+          </p>
+          <p>
+            Whether you are facing an active tank leak at 2:00 AM on a holiday weekend or planning an upgrade to a high-efficiency tankless system, our dispatch team works around the clock to provide fast, reliable, and respectful service.
+          </p>
+
+          <div class="about-pillars">
+            <div class="pillar-card">
+              <span class="pillar-icon">⚡</span>
+              <h4>Speed of Response</h4>
+              <p>Average emergency technician arrival within 45 to 75 minutes across covered metro zones.</p>
+            </div>
+            <div class="pillar-card">
+              <span class="pillar-icon">🛡️</span>
+              <h4>Licensed & Insured</h4>
+              <p>100% background-checked plumbers adhering strictly to state and local municipal plumbing codes.</p>
+            </div>
+            <div class="pillar-card">
+              <span class="pillar-icon">🏷️</span>
+              <h4>Upfront Pricing</h4>
+              <p>Honest quotes with no hidden charges or trip fee surprises before any repairs commence.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-card card">
+          <div class="card-body">
+            <span class="badge badge-orange">Company Overview</span>
+            <h3>{siteConfig.businessName} At A Glance</h3>
+            
+            <ul class="about-facts">
+              <li>
+                <strong>Founded:</strong>
+                <span>{siteConfig.foundedYear}</span>
+              </li>
+              <li>
+                <strong>Headquarters:</strong>
+                <span>{siteConfig.address.full}</span>
+              </li>
+              <li>
+                <strong>Operating Hours:</strong>
+                <span>24/7 / 365 Days a Year</span>
+              </li>
+              <li>
+                <strong>Coverage:</strong>
+                <span>All 50 US States</span>
+              </li>
+              <li>
+                <strong>License Status:</strong>
+                <span>Fully Licensed, Bonded & Insured</span>
+              </li>
+              <li>
+                <strong>Toll-Free Dispatch:</strong>
+                <a href={`tel:${siteConfig.phone}`} class="phone-link">{siteConfig.phoneFormatted}</a>
+              </li>
+            </ul>
+
+            <div class="about-card-callout">
+              <strong>Need Immediate Assistance?</strong>
+              <p>Our friendly customer support specialists are standing by 24/7 to answer your call.</p>
+              <a href={`tel:${siteConfig.phone}`} class="btn btn-primary" style="width: 100%; margin-top: var(--space-3);">
+                Call {siteConfig.phoneFormatted}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="cta-band">
+    <div class="container cta-band-inner text-center">
+      <h2>Experience the HotWater Rescue Difference</h2>
+      <p>Join thousands of satisfied homeowners nationwide who rely on us for fast, honest water heater services.</p>
+      <div class="cta-band-actions">
+        <a href={`tel:${siteConfig.phone}`} class="btn btn-primary btn-lg">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Call {siteConfig.phoneFormatted}
+        </a>
+        <a href="/contact-us/" class="btn btn-secondary btn-lg">Contact Us Online</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: var(--space-12);
+    align-items: flex-start;
+  }
+
+  .lead-text {
+    font-size: var(--text-lg);
+    line-height: var(--leading-relaxed);
+    color: var(--color-charcoal-light);
+    margin-block: var(--space-3) var(--space-4);
+  }
+
+  .about-pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+  }
+
+  .pillar-card {
+    background: var(--color-white);
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    border-top: 3px solid var(--color-orange);
+  }
+
+  .pillar-icon {
+    font-size: 1.8rem;
+    display: block;
+    margin-bottom: var(--space-2);
+  }
+
+  .pillar-card h4 {
+    font-size: var(--text-base);
+    margin-bottom: var(--space-1);
+  }
+
+  .pillar-card p {
+    font-size: var(--text-xs);
+    color: var(--color-charcoal-light);
+    margin: 0;
+    line-height: var(--leading-normal);
+  }
+
+  .about-facts {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-block: var(--space-5);
+    border-top: 1px solid var(--color-gray-200);
+    border-bottom: 1px solid var(--color-gray-200);
+    padding-block: var(--space-4);
+  }
+
+  .about-facts li {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--text-sm);
+  }
+
+  .about-facts strong {
+    color: var(--color-navy);
+  }
+
+  .about-facts span {
+    color: var(--color-charcoal-light);
+  }
+
+  .about-card-callout {
+    background: var(--color-navy);
+    color: var(--color-white);
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+    text-align: center;
+  }
+
+  .about-card-callout strong {
+    color: var(--color-orange);
+    display: block;
+    margin-bottom: var(--space-1);
+  }
+
+  .about-card-callout p {
+    font-size: var(--text-xs);
+    opacity: 0.85;
+    margin: 0;
+  }
+
+  .cta-band {
+    background: var(--color-navy);
+    color: var(--color-white);
+    padding-block: var(--space-16);
+  }
+
+  .cta-band h2 {
+    color: var(--color-white);
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-2);
+  }
+
+  .cta-band p {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: var(--text-base);
+    max-width: 600px;
+    margin-inline: auto;
+    margin-bottom: var(--space-6);
+  }
+
+  .cta-band-actions {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 900px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+    .about-pillars {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

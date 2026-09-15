@@ -1,0 +1,77 @@
+{
+  "note": "PLACEHOLDER TESTIMONIALS — Replace these with real customer reviews before launch. These are examples only.",
+  "reviews": [
+    {
+      "id": 1,
+      "name": "[PLACEHOLDER — Replace with real customer name]",
+      "location": "Myrtle Beach, SC",
+      "rating": 5,
+      "text": "Our water heater stopped working at 10 PM on a Friday. Called HotWater Rescue and their technician arrived within 45 minutes. He found a burned-out heating element, replaced it on the spot, and had hot water running again before midnight. Fair price, no surprise charges.",
+      "date": "2026-03-15",
+      "isPlaceholder": true
+    },
+    {
+      "id": 2,
+      "name": "[PLACEHOLDER — Replace with real customer name]",
+      "location": "Charleston, SC",
+      "rating": 5,
+      "text": "Needed a full water heater replacement in our 1940s home downtown. The old tank had rusted through at the bottom. They handled the removal, brought in a new 50-gallon unit, and made sure everything met current code. Took about four hours start to finish.",
+      "date": "2026-02-22",
+      "isPlaceholder": true
+    },
+    {
+      "id": 3,
+      "name": "[PLACEHOLDER — Replace with real customer name]",
+      "location": "Columbia, SC",
+      "rating": 5,
+      "text": "We switched from a big tank to a Rinnai tankless unit in our Columbia home. The installer explained everything clearly, rerouted the gas line, and walked us through the new controls. Our gas bill dropped noticeably every month after the switch.",
+      "date": "2026-01-10",
+      "isPlaceholder": true
+    },
+    {
+      "id": 4,
+      "name": "[PLACEHOLDER — Replace with real customer name]",
+      "location": "Greenville, SC",
+      "rating": 5,
+      "text": "The pilot light on our gas water heater kept going out every few days. Their tech found a failing thermocouple and a partially blocked vent pipe. Fixed both issues in about an hour. Reasonable price and he explained what went wrong in plain English.",
+      "date": "2025-12-05",
+      "isPlaceholder": true
+    },
+    {
+      "id": 5,
+      "name": "[PLACEHOLDER — Replace with real customer name]",
+      "location": "Rock Hill, SC",
+      "rating": 5,
+      "text": "Manage a 24-unit apartment complex and had two water heaters fail in the same week. HotWater Rescue replaced both commercial units quickly and set us up on a maintenance plan. No more surprise failures since then.",
+      "date": "2025-11-18",
+      "isPlaceholder": true
+    },
+    {
+      "id": 6,
+      "name": "[PLACEHOLDER — Replace with real customer name]",
+      "location": "Florence, SC",
+      "rating": 5,
+      "text": "Rusty water started coming out of every hot tap in the house. Turned out the anode rod was completely gone and sediment had built up at the bottom of the tank. They flushed the system, replaced the rod, and the water runs clear now.",
+      "date": "2025-10-30",
+      "isPlaceholder": true
+    },
+    {
+      "id": 7,
+      "name": "[PLACEHOLDER — Replace with real customer name]",
+      "location": "Summerville, SC",
+      "rating": 5,
+      "text": "Our electric water heater was tripping the breaker every morning. The technician tested everything methodically — turns out one of the elements had a ground fault. Replaced it and tested the breaker panel connection too. No more trips.",
+      "date": "2025-09-12",
+      "isPlaceholder": true
+    },
+    {
+      "id": 8,
+      "name": "[PLACEHOLDER — Replace with real customer name]",
+      "location": "Hilton Head Island, SC",
+      "rating": 5,
+      "text": "Own a small restaurant on the island and our commercial water heater went down during the lunch rush. Their emergency team came out within the hour and got us back to full hot water by mid-afternoon. Saved us from closing for the day.",
+      "date": "2025-08-20",
+      "isPlaceholder": true
+    }
+  ]
+}

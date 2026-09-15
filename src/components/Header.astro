@@ -1,0 +1,563 @@
+---
+import siteConfig from '../data/site-config.json';
+import services from '../data/services.json';
+import statesList from '../data/states-list.json';
+
+const currentPath = Astro.url.pathname;
+const topStates = statesList.slice(0, 10);
+---
+
+<header class="site-header" id="site-header">
+  <div class="header-inner container">
+    <a href="/" class="logo" aria-label={`${siteConfig.businessName} - Home`}>
+      <span class="logo-icon">🔥</span>
+      <span class="logo-text">
+        <span class="logo-name">HotWater</span>
+        <span class="logo-rescue">Rescue</span>
+      </span>
+    </a>
+
+    <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="/" class:list={["nav-link", { active: currentPath === '/' }]}>Home</a>
+        </li>
+        <li class="nav-item has-dropdown">
+          <a href="/services/" class:list={["nav-link", { active: currentPath.startsWith('/services') }]}>
+            Services
+            <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <ul class="dropdown" role="menu">
+            {services.map((service) => (
+              <li role="menuitem">
+                <a href={`/services/${service.slug}/`}>{service.shortName}</a>
+              </li>
+            ))}
+            <li role="menuitem" class="dropdown-all">
+              <a href="/services/">All Services →</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item has-dropdown">
+          <a href="/locations/" class:list={["nav-link", { active: currentPath.startsWith('/locations') }]}>
+            Locations
+            <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <ul class="dropdown" role="menu">
+            {topStates.map((state) => (
+              <li role="menuitem">
+                <a href={`/locations/${state.slug}/`}>{state.name}</a>
+              </li>
+            ))}
+            <li role="menuitem" class="dropdown-all">
+              <a href="/locations/">All 50 States →</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="/blog/" class:list={["nav-link", { active: currentPath.startsWith('/blog') }]}>Blog</a>
+        </li>
+        <li class="nav-item">
+          <a href="/about-us/" class:list={["nav-link", { active: currentPath === '/about-us/' }]}>About</a>
+        </li>
+        <li class="nav-item">
+          <a href="/contact-us/" class:list={["nav-link", { active: currentPath === '/contact-us/' }]}>Contact</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a href={`tel:${siteConfig.phone}`} class="header-phone phone-link" aria-label={`Call us at ${siteConfig.phoneFormatted}`}>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        {siteConfig.phoneFormatted}
+      </a>
+      <a href="/contact-us/" class="btn btn-primary btn-sm header-cta">Get an Estimate</a>
+    </div>
+
+    <button class="mobile-toggle" id="mobile-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Mobile navigation" aria-hidden="true">
+    <div class="mobile-menu-inner">
+      <div class="mobile-menu-header">
+        <a href="/" class="logo">
+          <span class="logo-icon">🔥</span>
+          <span class="logo-text">
+            <span class="logo-name">HotWater</span>
+            <span class="logo-rescue">Rescue</span>
+          </span>
+        </a>
+        <button class="mobile-close" id="mobile-close" aria-label="Close menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <nav class="mobile-nav" aria-label="Mobile navigation">
+        <a href="/" class="mobile-nav-link">Home</a>
+
+        <div class="mobile-accordion">
+          <button class="mobile-accordion-trigger" aria-expanded="false">
+            Services
+            <svg width="12" height="7" viewBox="0 0 12 7" fill="none" aria-hidden="true"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="mobile-accordion-content" hidden>
+            {services.map((service) => (
+              <a href={`/services/${service.slug}/`} class="mobile-sub-link">{service.shortName}</a>
+            ))}
+            <a href="/services/" class="mobile-sub-link mobile-sub-all">All Services →</a>
+          </div>
+        </div>
+
+        <div class="mobile-accordion">
+          <button class="mobile-accordion-trigger" aria-expanded="false">
+            Locations
+            <svg width="12" height="7" viewBox="0 0 12 7" fill="none" aria-hidden="true"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="mobile-accordion-content" hidden>
+            {topStates.map((state) => (
+              <a href={`/locations/${state.slug}/`} class="mobile-sub-link">{state.name}</a>
+            ))}
+            <a href="/locations/" class="mobile-sub-link mobile-sub-all">All 50 States →</a>
+          </div>
+        </div>
+
+        <a href="/blog/" class="mobile-nav-link">Blog</a>
+        <a href="/about-us/" class="mobile-nav-link">About</a>
+        <a href="/contact-us/" class="mobile-nav-link">Contact</a>
+      </nav>
+
+      <div class="mobile-menu-footer">
+        <a href={`tel:${siteConfig.phone}`} class="btn btn-primary btn-lg mobile-phone-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Call {siteConfig.phoneFormatted}
+        </a>
+        <p class="mobile-hours">Available 24/7 — Emergency Service</p>
+      </div>
+    </div>
+  </div>
+  <div class="mobile-overlay" id="mobile-overlay"></div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky);
+    background: var(--color-navy);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    gap: var(--space-4);
+  }
+
+  /* Logo */
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .logo-icon {
+    font-size: 1.6rem;
+  }
+
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+
+  .logo-name {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: var(--color-white);
+    letter-spacing: -0.02em;
+  }
+
+  .logo-rescue {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--color-red);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+
+  /* Navigation */
+  .main-nav {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-2) var(--space-3);
+    color: rgba(255, 255, 255, 0.85);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: var(--color-white);
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .nav-link svg {
+    transition: transform var(--transition-fast);
+  }
+
+  /* Dropdown */
+  .has-dropdown {
+    position: relative;
+  }
+
+  .dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 240px;
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+    padding: var(--space-2);
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-fast);
+    z-index: var(--z-dropdown);
+    margin-top: var(--space-2);
+  }
+
+  .has-dropdown:hover .dropdown,
+  .has-dropdown:focus-within .dropdown {
+    opacity: 1;
+    visibility: visible;
+    margin-top: 0;
+  }
+
+  .has-dropdown:hover .nav-link svg {
+    transform: rotate(180deg);
+  }
+
+  .dropdown li a {
+    display: block;
+    padding: var(--space-2) var(--space-3);
+    color: var(--color-charcoal);
+    font-size: var(--text-sm);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+  }
+
+  .dropdown li a:hover {
+    background: var(--color-gray-100);
+    color: var(--color-navy);
+  }
+
+  .dropdown-all a {
+    color: var(--color-orange) !important;
+    font-weight: 600;
+    border-top: 1px solid var(--color-gray-200);
+    margin-top: var(--space-1);
+    padding-top: var(--space-3) !important;
+  }
+
+  /* Header Actions */
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    flex-shrink: 0;
+  }
+
+  .header-phone {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+  }
+
+  .header-cta {
+    font-size: var(--text-sm);
+  }
+
+  /* Mobile Toggle */
+  .mobile-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    padding: var(--space-2);
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .hamburger-line {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--color-white);
+    border-radius: 2px;
+    transition: all var(--transition-base);
+  }
+
+  /* Mobile Menu */
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 320px;
+    max-width: 85vw;
+    height: 100vh;
+    background: var(--color-white);
+    z-index: var(--z-modal);
+    transition: right var(--transition-slow);
+    overflow-y: auto;
+  }
+
+  .mobile-menu.open {
+    right: 0;
+  }
+
+  .mobile-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: var(--z-overlay);
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-base);
+  }
+
+  .mobile-overlay.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .mobile-menu-inner {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: var(--space-5);
+  }
+
+  .mobile-menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: var(--space-5);
+    border-bottom: 1px solid var(--color-gray-200);
+    margin-bottom: var(--space-4);
+  }
+
+  .mobile-menu-header .logo-name {
+    color: var(--color-navy);
+  }
+
+  .mobile-close {
+    padding: var(--space-2);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-charcoal);
+    border-radius: var(--radius-md);
+  }
+
+  .mobile-close:hover {
+    background: var(--color-gray-100);
+  }
+
+  .mobile-nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    flex: 1;
+  }
+
+  .mobile-nav-link {
+    display: block;
+    padding: var(--space-3) var(--space-3);
+    color: var(--color-charcoal);
+    font-size: var(--text-lg);
+    font-weight: 500;
+    border-radius: var(--radius-md);
+    transition: background var(--transition-fast);
+  }
+
+  .mobile-nav-link:hover {
+    background: var(--color-gray-100);
+  }
+
+  .mobile-accordion-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: var(--space-3);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: var(--text-lg);
+    font-weight: 500;
+    color: var(--color-charcoal);
+    border-radius: var(--radius-md);
+    transition: background var(--transition-fast);
+  }
+
+  .mobile-accordion-trigger:hover {
+    background: var(--color-gray-100);
+  }
+
+  .mobile-accordion-trigger svg {
+    transition: transform var(--transition-base);
+  }
+
+  .mobile-accordion-trigger[aria-expanded="true"] svg {
+    transform: rotate(180deg);
+  }
+
+  .mobile-accordion-content {
+    padding-left: var(--space-4);
+  }
+
+  .mobile-sub-link {
+    display: block;
+    padding: var(--space-2) var(--space-3);
+    color: var(--color-charcoal-light);
+    font-size: var(--text-base);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+  }
+
+  .mobile-sub-link:hover {
+    background: var(--color-gray-100);
+    color: var(--color-navy);
+  }
+
+  .mobile-sub-all {
+    color: var(--color-orange);
+    font-weight: 600;
+    margin-top: var(--space-1);
+  }
+
+  .mobile-menu-footer {
+    margin-top: auto;
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--color-gray-200);
+    text-align: center;
+  }
+
+  .mobile-phone-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .mobile-hours {
+    margin-top: var(--space-3);
+    font-size: var(--text-sm);
+    color: var(--color-charcoal-light);
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .main-nav {
+      display: none;
+    }
+
+    .header-phone {
+      display: none;
+    }
+
+    .mobile-toggle {
+      display: flex;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .header-cta {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  // Mobile menu toggle
+  const toggle = document.getElementById('mobile-toggle');
+  const closeBtn = document.getElementById('mobile-close');
+  const menu = document.getElementById('mobile-menu');
+  const overlay = document.getElementById('mobile-overlay');
+
+  function openMenu() {
+    menu?.classList.add('open');
+    overlay?.classList.add('open');
+    menu?.setAttribute('aria-hidden', 'false');
+    toggle?.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    menu?.classList.remove('open');
+    overlay?.classList.remove('open');
+    menu?.setAttribute('aria-hidden', 'true');
+    toggle?.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  toggle?.addEventListener('click', openMenu);
+  closeBtn?.addEventListener('click', closeMenu);
+  overlay?.addEventListener('click', closeMenu);
+
+  // Mobile accordion
+  document.querySelectorAll('.mobile-accordion-trigger').forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const content = trigger.nextElementSibling;
+      const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+      trigger.setAttribute('aria-expanded', String(!isOpen));
+      if (content) {
+        content.hidden = isOpen;
+      }
+    });
+  });
+
+  // Close menu on escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+
+  // Sticky header shadow on scroll
+  const header = document.getElementById('site-header');
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.scrollY;
+    if (currentScroll > 10) {
+      header?.classList.add('scrolled');
+    } else {
+      header?.classList.remove('scrolled');
+    }
+    lastScroll = currentScroll;
+  }, { passive: true });
+</script>

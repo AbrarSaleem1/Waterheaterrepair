@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import siteConfig from '../data/site-config.json';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Terms of Service' }
+];
+---
+
+<BaseLayout
+  title={`Terms of Service | ${siteConfig.businessName}`}
+  description={`Terms and conditions governing the use of ${siteConfig.businessName} and our water heater dispatch network.`}
+  breadcrumbs={breadcrumbs}
+>
+  <Hero
+    title="Terms of Service"
+    subtitle="Please review these terms and conditions prior to using our website and dispatch services."
+    breadcrumbs={breadcrumbs}
+    variant="short"
+  />
+
+  <section class="section">
+    <div class="container container-narrow content-body">
+      <p>Last Updated: March 2026</p>
+
+      <h2>1. Acceptance of Terms</h2>
+      <p>
+        By accessing or using {siteConfig.domain} and our emergency telephone hotline ({siteConfig.phoneFormatted}), you agree to be bound by these Terms of Service and all applicable federal, state, and local laws.
+      </p>
+
+      <h2>2. Nature of Services</h2>
+      <p>
+        {siteConfig.businessName} operates a premier national customer referral and dispatch service connecting consumers with independent, licensed, and insured plumbing contractors. All plumbing work, physical repairs, permitting, and equipment warranties are performed and fulfilled directly by the licensed local contractor servicing your home.
+      </p>
+
+      <h2>3. Estimates & Pricing</h2>
+      <p>
+        Any price estimates or cost ranges displayed on our website are based on average regional data and are provided for informational reference only. Exact pricing is determined after an on-site physical diagnostic evaluation by a licensed technician and must be approved in writing before work begins.
+      </p>
+
+      <h2>4. Limitation of Liability</h2>
+      <p>
+        {siteConfig.businessName} shall not be liable for any indirect, incidental, or consequential damages resulting from the use of our referral platform or services provided by independent contractors.
+      </p>
+
+      <h2>5. Governing Law</h2>
+      <p>
+        These Terms are governed by and construed in accordance with the laws of the State of South Carolina, without regard to conflict of law principles.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

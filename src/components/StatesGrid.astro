@@ -1,0 +1,118 @@
+---
+import statesList from '../data/states-list.json';
+
+export interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<div class:list={["states-grid", { "states-grid-compact": compact }]}>
+  {statesList.map((state) => (
+    <a href={`/locations/${state.slug}/`} class="state-card card card-sm">
+      <div class="card-body">
+        <span class="state-abbr">{state.abbr}</span>
+        <span class="state-name">{state.name}</span>
+        <svg class="state-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </a>
+  ))}
+</div>
+
+<style>
+  .states-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--space-4);
+  }
+
+  .states-grid-compact {
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--space-3);
+  }
+
+  .state-card {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .state-card .card-body {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .state-abbr {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: var(--text-sm);
+    color: var(--color-navy);
+    background: rgba(27, 42, 74, 0.06);
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .state-name {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-charcoal);
+    flex: 1;
+  }
+
+  .state-arrow {
+    color: var(--color-gray-400);
+    transition: all var(--transition-fast);
+    flex-shrink: 0;
+  }
+
+  .state-card:hover .state-arrow {
+    color: var(--color-orange);
+    transform: translateX(3px);
+  }
+
+  .state-card:hover .state-abbr {
+    background: var(--color-navy);
+    color: var(--color-white);
+  }
+
+  .states-grid-compact .state-card .card-body {
+    padding: var(--space-2) var(--space-3);
+  }
+
+  .states-grid-compact .state-abbr {
+    width: 30px;
+    height: 30px;
+    font-size: var(--text-xs);
+  }
+
+  .states-grid-compact .state-name {
+    font-size: var(--text-xs);
+  }
+
+  .states-grid-compact .state-arrow {
+    display: none;
+  }
+
+  @media (max-width: 1024px) {
+    .states-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .states-grid-compact {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .states-grid,
+    .states-grid-compact {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

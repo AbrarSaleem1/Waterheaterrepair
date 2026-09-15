@@ -1,0 +1,79 @@
+---
+export interface Props {
+  cities: { name: string; slug: string; stateSlug: string }[];
+}
+
+const { cities } = Astro.props;
+---
+
+<div class="cities-grid">
+  {cities.map((city) => (
+    <a href={`/locations/${city.stateSlug}/${city.slug}/`} class="city-card card card-sm">
+      <div class="card-body">
+        <svg class="city-pin" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span class="city-name">{city.name}</span>
+        <svg class="city-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+    </a>
+  ))}
+</div>
+
+<style>
+  .cities-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-3);
+  }
+
+  .city-card {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .city-card .card-body {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .city-pin {
+    color: var(--color-red);
+    flex-shrink: 0;
+  }
+
+  .city-name {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    flex: 1;
+  }
+
+  .city-arrow {
+    color: var(--color-gray-400);
+    flex-shrink: 0;
+    transition: all var(--transition-fast);
+  }
+
+  .city-card:hover .city-arrow {
+    color: var(--color-orange);
+    transform: translateX(2px);
+  }
+
+  @media (max-width: 1024px) {
+    .cities-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .cities-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 400px) {
+    .cities-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

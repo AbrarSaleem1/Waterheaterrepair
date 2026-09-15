@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import siteConfig from '../data/site-config.json';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Privacy Policy' }
+];
+---
+
+<BaseLayout
+  title={`Privacy Policy | ${siteConfig.businessName}`}
+  description={`Privacy Policy for ${siteConfig.businessName}. Learn how we protect your personal information and privacy rights.`}
+  breadcrumbs={breadcrumbs}
+>
+  <Hero
+    title="Privacy Policy"
+    subtitle="Our commitment to safeguarding your personal data and privacy."
+    breadcrumbs={breadcrumbs}
+    variant="short"
+  />
+
+  <section class="section">
+    <div class="container container-narrow content-body">
+      <p>Last Updated: March 2026</p>
+      
+      <h2>1. Information We Collect</h2>
+      <p>
+        At {siteConfig.businessName}, we collect information you provide directly to us when requesting a water heater estimate, booking an appointment, or contacting our customer service desk. This includes your name, phone number, email address, postal code, and notes regarding your water heating equipment.
+      </p>
+
+      <h2>2. How We Use Your Information</h2>
+      <p>
+        We use the collected details solely to connect you with certified local plumbing contractors, provide free written quotes, schedule diagnostic visits, and confirm appointment details via telephone or SMS. We do not sell or rent your personal information to third-party marketing companies.
+      </p>
+
+      <h2>3. Communication & Phone Call Recording</h2>
+      <p>
+        For training and quality assurance purposes, telephone calls placed to or received from our dispatch numbers (including {siteConfig.phoneFormatted}) may be recorded or monitored. By calling or submitting your phone number, you consent to receive telephone calls and text messages regarding your service request.
+      </p>
+
+      <h2>4. Cookies and Analytics</h2>
+      <p>
+        Our website uses standard cookies and analytics tools to understand website traffic, monitor page performance, and improve user navigation. You may choose to disable cookies in your browser settings.
+      </p>
+
+      <h2>5. Contact Us Regarding Your Privacy</h2>
+      <p>
+        If you have questions or requests regarding your personal information, please contact us by writing to {siteConfig.email} or visiting our office at {siteConfig.address.full}.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,30 @@
+{
+  "businessName": "HotWater Rescue",
+  "domain": "https://proheatrepair.com",
+  "phone": "+18338950968",
+  "phoneFormatted": "(833) 895-0968",
+  "email": "info@proheatrepair.com",
+  "address": {
+    "street": "780 Commerce Pl",
+    "city": "Myrtle Beach",
+    "state": "SC",
+    "zip": "29577",
+    "country": "US",
+    "full": "780 Commerce Pl, Myrtle Beach, SC 29577"
+  },
+  "hours": "24/7",
+  "hoursStructured": {
+    "Monday": "00:00-23:59",
+    "Tuesday": "00:00-23:59",
+    "Wednesday": "00:00-23:59",
+    "Thursday": "00:00-23:59",
+    "Friday": "00:00-23:59",
+    "Saturday": "00:00-23:59",
+    "Sunday": "00:00-23:59"
+  },
+  "foundedYear": 2018,
+  "licensedInsured": true,
+  "primaryKeyword": "water heater repair",
+  "tagline": "Fast Water Heater Repair & Installation — 24/7",
+  "socialLinks": {}
+}

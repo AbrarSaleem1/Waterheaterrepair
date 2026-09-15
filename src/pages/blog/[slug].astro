@@ -1,0 +1,443 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import TrustStrip from '../../components/TrustStrip.astro';
+import siteConfig from '../../data/site-config.json';
+import blogs from '../../data/blogs.json';
+
+export async function getStaticPaths() {
+  return blogs.map((post) => {
+    // Find 3 related posts in the same or other categories
+    const related = blogs
+      .filter((b) => b.slug !== post.slug)
+      .slice(0, 3);
+
+    return {
+      params: { slug: post.slug },
+      props: { post, related }
+    };
+  });
+}
+
+interface Props {
+  post: (typeof blogs)[0];
+  related: (typeof blogs);
+}
+
+const { post, related } = Astro.props;
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Blog', href: '/blog/' },
+  { label: post.title }
+];
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": post.title,
+  "description": post.snippet,
+  "datePublished": post.date,
+  "author": {
+    "@type": "Person",
+    "name": post.author,
+    "jobTitle": "Master Plumber & Technical Field Director"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": siteConfig.businessName,
+    "url": siteConfig.domain,
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${siteConfig.domain}/images/logo.png`
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": `${siteConfig.domain}/blog/${post.slug}/`
+  }
+};
+---
+
+<BaseLayout
+  title={`${post.title} | ${siteConfig.businessName}`}
+  description={post.snippet}
+  breadcrumbs={breadcrumbs}
+  jsonLd={articleSchema}
+>
+  <Hero
+    title={post.title}
+    subtitle={`By ${post.author} • ${post.date} • ${post.readTime}`}
+    breadcrumbs={breadcrumbs}
+    variant="short"
+  />
+
+  <TrustStrip />
+
+  <!-- Article Body -->
+  <article class="section article-section">
+    <div class="container">
+      <div class="article-layout">
+        
+        <!-- Main Content Column -->
+        <div class="article-main">
+          
+          <!-- Metadata Badge Strip -->
+          <div class="article-meta-strip">
+            <span class="badge badge-orange">{post.category}</span>
+            <span class="meta-time">⏱️ {post.readTime}</span>
+            <span class="meta-author">✍️ {post.author}</span>
+          </div>
+
+          <!-- Key Takeaways Callout Box -->
+          <div class="card takeaways-box">
+            <div class="card-body">
+              <div class="takeaways-header">
+                <span class="takeaways-icon">💡</span>
+                <h3>Executive Summary & Key Takeaways</h3>
+              </div>
+              <ul class="takeaways-list">
+                {post.keyTakeaways.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <!-- Rendered Article Prose -->
+          <div class="article-prose">
+            {post.content.split('\n\n').map((block) => {
+              if (block.startsWith('### ')) {
+                return <h3>{block.replace('### ', '')}</h3>;
+              }
+              if (block.startsWith('#### ')) {
+                return <h4>{block.replace('#### ', '')}</h4>;
+              }
+              if (block.startsWith('- ')) {
+                const items = block.split('\n- ');
+                return (
+                  <ul>
+                    {items.map((it) => (
+                      <li>{it.replace(/^- /, '')}</li>
+                    ))}
+                  </ul>
+                );
+              }
+              if (/^\d+\. /.test(block)) {
+                const items = block.split(/\n\d+\. /);
+                return (
+                  <ol>
+                    {items.map((it) => (
+                      <li>{it.replace(/^\d+\. /, '')}</li>
+                    ))}
+                  </ol>
+                );
+              }
+              return <p>{block}</p>;
+            })}
+          </div>
+
+          <!-- Mid-Article Emergency Assistance Box -->
+          <div class="card article-cta-box">
+            <div class="card-body text-center">
+              <span class="badge badge-red">24/7 Professional Assistance</span>
+              <h3 style="margin-block: var(--space-2) var(--space-3);">Dealing with an Active Water Heater Issue?</h3>
+              <p style="font-size: var(--text-base); color: var(--color-charcoal-light); margin-bottom: var(--space-5);">
+                Our certified master plumbers carry universal replacement parts, heating elements, thermocouples, and new energy-efficient tanks for same-day emergency dispatch.
+              </p>
+              <div class="cta-btn-group">
+                <a href={`tel:${siteConfig.phone}`} class="btn btn-primary btn-lg">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                  Call {siteConfig.phoneFormatted}
+                </a>
+                <a href="/contact-us/" class="btn btn-secondary btn-lg">
+                  Phone Estimate Desk
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Author Bio Card -->
+          <div class="card author-card">
+            <div class="card-body author-body">
+              <div class="author-avatar">👨‍🔧</div>
+              <div class="author-details">
+                <h4>Reviewed & Published by {post.author}</h4>
+                <p>
+                  David Sullivan is a licensed Master Plumber and mechanical systems specialist with over 25 years of hands-on experience troubleshooting, rebuilding, and installing residential and commercial gas, electric, and tankless water heating systems across North America.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Related Reading -->
+          <div class="related-articles-section">
+            <h3>Related Troubleshooting & Maintenance Guides</h3>
+            <div class="related-grid">
+              {related.map((rel) => (
+                <a href={`/blog/${rel.slug}/`} class="related-card card card-sm">
+                  <div class="card-body">
+                    <span class="badge badge-navy">{rel.category}</span>
+                    <h4>{rel.title}</h4>
+                    <span class="read-more-link">Read Guide →</span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Sidebar Column -->
+        <aside class="article-sidebar">
+          
+          <!-- Immediate Phone Estimate Card -->
+          <div class="card sidebar-cta card-body text-center">
+            <span class="badge badge-orange">Immediate Dispatch</span>
+            <h3 style="margin-block: var(--space-2);">Need Emergency Help?</h3>
+            <p style="font-size: var(--text-sm); color: var(--color-charcoal-light); margin-bottom: var(--space-4);">
+              Don't risk water damage or freezing showers. Speak directly to an on-duty technician:
+            </p>
+            <a href={`tel:${siteConfig.phone}`} class="btn btn-primary btn-block" style="width: 100%;">
+              📞 {siteConfig.phoneFormatted}
+            </a>
+            <span style="font-size: var(--text-xs); color: var(--color-charcoal-light); margin-top: var(--space-2); display: block;">
+              Upfront phone estimates • 24/7 Service
+            </span>
+          </div>
+
+          <!-- Popular Guides -->
+          <div class="card card-body" style="margin-top: var(--space-6);">
+            <h4>Explore Water Heater Topics</h4>
+            <ul class="topics-list">
+              <li><a href="/blog/">All Articles ({blogs.length})</a></li>
+              <li><a href="/services/emergency-water-heater-repair/">Emergency Leaks & Repairs</a></li>
+              <li><a href="/services/tankless-water-heater-installation/">Tankless Conversions</a></li>
+              <li><a href="/services/gas-water-heater-services/">Gas Pilot & Thermocouple</a></li>
+              <li><a href="/services/electric-water-heater-services/">Electric Elements & 240V</a></li>
+              <li><a href="/locations/">Local Plumbers Near You</a></li>
+            </ul>
+          </div>
+
+        </aside>
+
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-layout {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: var(--space-10);
+    align-items: flex-start;
+  }
+
+  .article-meta-strip {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-6);
+  }
+
+  .meta-time, .meta-author {
+    font-size: var(--text-sm);
+    color: var(--color-charcoal-light);
+  }
+
+  .takeaways-box {
+    background: #f0f7ff;
+    border-left: 4px solid var(--color-navy);
+    margin-bottom: var(--space-8);
+  }
+
+  .takeaways-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+  }
+
+  .takeaways-icon {
+    font-size: 1.5rem;
+  }
+
+  .takeaways-header h3 {
+    font-size: var(--text-lg);
+    color: var(--color-navy);
+    margin: 0;
+  }
+
+  .takeaways-list {
+    margin: 0;
+    padding-left: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .takeaways-list li {
+    font-size: var(--text-sm);
+    color: var(--color-charcoal);
+    line-height: 1.5;
+  }
+
+  .article-prose {
+    font-size: var(--text-base);
+    line-height: 1.8;
+    color: var(--color-charcoal);
+  }
+
+  .article-prose h3 {
+    font-size: var(--text-2xl);
+    color: var(--color-navy);
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-3);
+    border-bottom: 2px solid var(--color-gray-100);
+    padding-bottom: var(--space-2);
+  }
+
+  .article-prose h4 {
+    font-size: var(--text-lg);
+    color: var(--color-navy);
+    margin-top: var(--space-6);
+    margin-bottom: var(--space-2);
+  }
+
+  .article-prose p {
+    margin-bottom: var(--space-5);
+  }
+
+  .article-prose ul, .article-prose ol {
+    margin-bottom: var(--space-5);
+    padding-left: var(--space-6);
+  }
+
+  .article-prose li {
+    margin-bottom: var(--space-2);
+  }
+
+  .article-cta-box {
+    background: #FFF3E0;
+    border: 2px solid var(--color-orange);
+    margin-block: var(--space-10);
+  }
+
+  .cta-btn-group {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  .author-card {
+    background: var(--color-gray-50);
+    margin-bottom: var(--space-10);
+  }
+
+  .author-body {
+    display: flex;
+    gap: var(--space-5);
+    align-items: center;
+  }
+
+  .author-avatar {
+    font-size: 3rem;
+    background: #fff;
+    border-radius: 50%;
+    width: 68px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  }
+
+  .author-details h4 {
+    margin: 0 0 var(--space-2) 0;
+    font-size: var(--text-base);
+    color: var(--color-navy);
+  }
+
+  .author-details p {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--color-charcoal-light);
+    line-height: 1.5;
+  }
+
+  .related-articles-section h3 {
+    font-size: var(--text-xl);
+    color: var(--color-navy);
+    margin-bottom: var(--space-4);
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .related-card {
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .related-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .related-card h4 {
+    font-size: var(--text-base);
+    color: var(--color-navy);
+    margin-block: var(--space-2);
+  }
+
+  .read-more-link {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    color: var(--color-orange);
+  }
+
+  .sidebar-cta {
+    border-top: 4px solid var(--color-orange);
+  }
+
+  .topics-list {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-3) 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .topics-list li a {
+    font-size: var(--text-sm);
+    color: var(--color-charcoal);
+    text-decoration: none;
+    display: block;
+    padding: 4px 0;
+    border-bottom: 1px dashed var(--color-gray-200);
+  }
+
+  .topics-list li a:hover {
+    color: var(--color-orange);
+    padding-left: 4px;
+  }
+
+  @media (max-width: 900px) {
+    .article-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .author-body {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>
