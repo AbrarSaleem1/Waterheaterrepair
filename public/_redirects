@@ -1,0 +1,5 @@
+# 301 Redirects from legacy /locations/ URL structure to short URL structure
+/locations/:state/:city /:state/:city/ 301
+/locations/:state/:city/ /:state/:city/ 301
+/locations/:state /:state/ 301
+/locations/:state/ /:state/ 301

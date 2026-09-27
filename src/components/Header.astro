@@ -46,7 +46,7 @@ const topStates = statesList.slice(0, 10);
           <ul class="dropdown" role="menu">
             {topStates.map((state) => (
               <li role="menuitem">
-                <a href={`/locations/${state.slug}/`}>{state.name}</a>
+                <a href={`/${state.slug}/`}>{state.name}</a>
               </li>
             ))}
             <li role="menuitem" class="dropdown-all">
@@ -120,7 +120,7 @@ const topStates = statesList.slice(0, 10);
           </button>
           <div class="mobile-accordion-content" hidden>
             {topStates.map((state) => (
-              <a href={`/locations/${state.slug}/`} class="mobile-sub-link">{state.name}</a>
+              <a href={`/${state.slug}/`} class="mobile-sub-link">{state.name}</a>
             ))}
             <a href="/locations/" class="mobile-sub-link mobile-sub-all">All 50 States →</a>
           </div>

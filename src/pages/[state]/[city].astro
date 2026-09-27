@@ -1,11 +1,11 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import Hero from '../../../components/Hero.astro';
-import TrustStrip from '../../../components/TrustStrip.astro';
-import siteConfig from '../../../data/site-config.json';
-import services from '../../../data/services.json';
-import { getAllStates, getCitiesForState, slugify, type CityInfo, type StateInfo } from '../../../utils/locations';
-import { generateCitySEO } from '../../../utils/city-seo-generator';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import TrustStrip from '../../components/TrustStrip.astro';
+import siteConfig from '../../data/site-config.json';
+import services from '../../data/services.json';
+import { getAllStates, getCitiesForState, slugify, type CityInfo, type StateInfo } from '../../utils/locations';
+import { generateCitySEO } from '../../utils/city-seo-generator';
 
 export async function getStaticPaths() {
   const states = getAllStates();
@@ -68,7 +68,7 @@ const seoData = generateCitySEO(city, state);
 const breadcrumbs = [
   { label: 'Home', href: '/' },
   { label: 'Locations', href: '/locations/' },
-  { label: state.name, href: `/locations/${state.slug}/` },
+  { label: state.name, href: `/${state.slug}/` },
   { label: city.name },
 ];
 
@@ -77,7 +77,7 @@ const citySchema = {
   "@type": "PlumbingService",
   "name": `${siteConfig.businessName} — ${city.name}, ${state.abbr}`,
   "telephone": siteConfig.phone,
-  "url": `${siteConfig.domain}/locations/${state.slug}/${city.slug}/`,
+  "url": `${siteConfig.domain}/${state.slug}/${city.slug}/`,
   "image": `${siteConfig.domain}/images/logo.png`,
   "address": {
     "@type": "PostalAddress",
@@ -351,7 +351,7 @@ const faqSchema = {
               <h3>Also Serving Communities Near {city.name}:</h3>
               <div class="sister-links-grid">
                 {sisterCities.map((sister) => (
-                  <a href={`/locations/${state.slug}/${sister.slug}/`} class="sister-link-card card card-sm">
+                  <a href={`/${state.slug}/${sister.slug}/`} class="sister-link-card card card-sm">
                     <div class="card-body">
                       <span>📍 {sister.name}, {state.abbr}</span>
                       <span class="sister-arrow">→</span>
@@ -360,7 +360,7 @@ const faqSchema = {
                 ))}
               </div>
               <div class="sister-view-all">
-                <a href={`/locations/${state.slug}/`}>Explore all covered cities across {state.name} →</a>
+                <a href={`/${state.slug}/`}>Explore all covered cities across {state.name} →</a>
               </div>
             </div>
           )}

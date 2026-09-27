@@ -65,7 +65,7 @@ const topStates = [
         <h4 class="footer-heading">Top Locations</h4>
         <ul class="footer-links">
           {topStates.map((state) => (
-            <li><a href={`/locations/${state!.slug}/`}>{state!.name}</a></li>
+            <li><a href={`/${state!.slug}/`}>{state!.name}</a></li>
           ))}
           <li><a href="/locations/" class="footer-link-all">All 50 States →</a></li>
         </ul>

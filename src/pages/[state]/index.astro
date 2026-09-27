@@ -1,11 +1,11 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import Hero from '../../../components/Hero.astro';
-import TrustStrip from '../../../components/TrustStrip.astro';
-import CitiesGrid from '../../../components/CitiesGrid.astro';
-import ServicesGrid from '../../../components/ServicesGrid.astro';
-import siteConfig from '../../../data/site-config.json';
-import { getAllStates, getCitiesForState, getTopCitiesForState } from '../../../utils/locations';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import TrustStrip from '../../components/TrustStrip.astro';
+import CitiesGrid from '../../components/CitiesGrid.astro';
+import ServicesGrid from '../../components/ServicesGrid.astro';
+import siteConfig from '../../data/site-config.json';
+import { getAllStates, getCitiesForState, getTopCitiesForState } from '../../utils/locations';
 
 export async function getStaticPaths() {
   const states = getAllStates();
@@ -51,7 +51,7 @@ const stateSchema = {
   "@type": "PlumbingService",
   "name": `${siteConfig.businessName} — ${state.name}`,
   "telephone": siteConfig.phone,
-  "url": `${siteConfig.domain}/locations/${state.slug}/`,
+  "url": `${siteConfig.domain}/${state.slug}/`,
   "areaServed": {
     "@type": "State",
     "name": state.name
@@ -127,7 +127,7 @@ const stateSchema = {
             <p class="cities-overflow-list">
               {allCitiesInState.slice(topCities.length, 120).map((c, i) => (
                 <span>
-                  <a href={`/locations/${state.slug}/${c.slug}/`}>{c.name}</a>
+                  <a href={`/${state.slug}/${c.slug}/`}>{c.name}</a>
                   {i < Math.min(allCitiesInState.length - topCities.length, 120) - 1 ? ' • ' : ''}
                 </span>
               ))}
