@@ -1,9 +1,26 @@
 ---
+import siteConfig from '../data/site-config.json';
+
 export interface Props {
   items: { label: string; href?: string }[];
 }
 
 const { items } = Astro.props;
+const siteUrl = siteConfig.domain.replace(/\/+$/, '');
+
+const formatBreadcrumbUrl = (href?: string) => {
+  if (!href) return undefined;
+  if (href === '/') return `${siteUrl}/`;
+  const clean = href.replace(/\.html?$/i, '').replace(/\/+/g, '/');
+  return `${siteUrl}${clean.endsWith('/') ? clean : `${clean}/`}`;
+};
+
+const formatBreadcrumbHref = (href?: string) => {
+  if (!href) return undefined;
+  if (href === '/') return '/';
+  const clean = href.replace(/\.html?$/i, '').replace(/\/+/g, '/');
+  return clean.endsWith('/') ? clean : `${clean}/`;
+};
 
 const breadcrumbSchema = {
   "@context": "https://schema.org",
@@ -12,7 +29,7 @@ const breadcrumbSchema = {
     "@type": "ListItem",
     "position": index + 1,
     "name": item.label,
-    ...(item.href ? { "item": `https://proheatrepair.com${item.href}` } : {}),
+    ...(item.href ? { "item": formatBreadcrumbUrl(item.href) } : {}),
   })),
 };
 ---
@@ -22,7 +39,7 @@ const breadcrumbSchema = {
     {items.map((item, i) => (
       <li class="breadcrumb-item">
         {item.href ? (
-          <a href={item.href} class="breadcrumb-link">{item.label}</a>
+          <a href={formatBreadcrumbHref(item.href)} class="breadcrumb-link">{item.label}</a>
         ) : (
           <span class="breadcrumb-current" aria-current="page">{item.label}</span>
         )}
