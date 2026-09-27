@@ -12,6 +12,7 @@ export interface Props {
   ogImage?: string;
   ogType?: string;
   noindex?: boolean;
+  breadcrumbs?: { label: string; href?: string }[];
   jsonLd?: object | object[];
 }
 
@@ -22,6 +23,7 @@ const {
   ogImage = '/images/og-default.jpg',
   ogType = 'website',
   noindex = false,
+  breadcrumbs,
   jsonLd,
 } = Astro.props;
 
@@ -63,11 +65,24 @@ const organizationSchema = {
   }
 };
 
+const breadcrumbSchema = (breadcrumbs && breadcrumbs.length > 0) ? {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": breadcrumbs.map((crumb, idx) => ({
+    "@type": "ListItem",
+    "position": idx + 1,
+    "name": crumb.label,
+    ...(crumb.href ? { "item": toCanonicalUrl(crumb.href) } : {})
+  }))
+} : null;
+
+const extraSchemas = breadcrumbSchema ? [breadcrumbSchema] : [];
+
 const allSchemas = jsonLd
   ? Array.isArray(jsonLd)
-    ? [organizationSchema, ...jsonLd]
-    : [organizationSchema, jsonLd]
-  : [organizationSchema];
+    ? [organizationSchema, ...extraSchemas, ...jsonLd]
+    : [organizationSchema, ...extraSchemas, jsonLd]
+  : [organizationSchema, ...extraSchemas];
 ---
 
 <!DOCTYPE html>

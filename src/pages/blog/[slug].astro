@@ -57,11 +57,19 @@ const articleSchema = {
     "@id": `${siteConfig.domain}/blog/${post.slug}/`
   }
 };
+
+const metaTitle = post.title.length <= 48
+  ? `${post.title} | ${siteConfig.businessName}`
+  : (post.title.length <= 68 ? post.title : `${post.title.slice(0, 65).trim()}...`);
+
+const metaDescription = post.snippet.length <= 155
+  ? post.snippet
+  : `${post.snippet.slice(0, 152).trim()}...`;
 ---
 
 <BaseLayout
-  title={`${post.title} | ${siteConfig.businessName}`}
-  description={post.snippet}
+  title={metaTitle}
+  description={metaDescription}
   breadcrumbs={breadcrumbs}
   jsonLd={articleSchema}
 >

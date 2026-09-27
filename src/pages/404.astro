@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import siteConfig from '../data/site-config.json';
+---
+
+<BaseLayout
+  title="Page Not Found (404) | HotWater Rescue"
+  description="Sorry, the page you are looking for could not be found. Find certified 24/7 water heater repair technicians in your city."
+  noindex={true}
+>
+  <div class="error-page-section">
+    <div class="container text-center">
+      <div class="error-badge">404 Error</div>
+      <h1 class="error-title">Page Not Found</h1>
+      <p class="error-desc">
+        We couldn't find the page you were looking for. It may have been moved, updated, or the address might be mistyped.
+      </p>
+
+      <div class="error-cta-group">
+        <a href="/" class="btn btn-primary btn-lg">Return to Homepage</a>
+        <a href="/locations/" class="btn btn-outline btn-lg">Browse 50 States Directory</a>
+        <a href={`tel:${siteConfig.phone}`} class="btn btn-accent btn-lg">
+          Call 24/7 Hotline: {siteConfig.phoneFormatted}
+        </a>
+      </div>
+
+      <div class="popular-links">
+        <h3>Popular Services</h3>
+        <div class="links-grid">
+          <a href="/services/gas-water-heater-repair/">Gas Water Heater Repair</a>
+          <a href="/services/electric-water-heater-repair/">Electric Water Heater Repair</a>
+          <a href="/services/tankless-water-heater-installation/">Tankless Water Heater Service</a>
+          <a href="/services/water-heater-replacement/">Water Heater Replacement</a>
+          <a href="/blog/">Troubleshooting Guides</a>
+          <a href="/contact-us/">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .error-page-section {
+    padding: var(--space-16) 0;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .error-badge {
+    display: inline-block;
+    padding: var(--space-1) var(--space-4);
+    background-color: var(--color-danger-light, #fee2e2);
+    color: var(--color-danger, #dc2626);
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: var(--font-sm);
+    margin-bottom: var(--space-4);
+  }
+
+  .error-title {
+    font-size: var(--font-4xl);
+    font-weight: 800;
+    color: var(--color-navy);
+    margin-bottom: var(--space-4);
+  }
+
+  .error-desc {
+    font-size: var(--font-lg);
+    color: var(--color-gray-600);
+    max-width: 600px;
+    margin: 0 auto var(--space-8);
+  }
+
+  .error-cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-12);
+  }
+
+  .popular-links {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: var(--space-8);
+    background-color: var(--color-gray-50);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-gray-200);
+  }
+
+  .popular-links h3 {
+    font-size: var(--font-lg);
+    color: var(--color-navy);
+    margin-bottom: var(--space-4);
+  }
+
+  .links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--space-3);
+  }
+
+  .links-grid a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: var(--font-sm);
+    padding: var(--space-2);
+    border-radius: var(--radius-sm);
+    transition: background-color var(--transition-fast);
+  }
+
+  .links-grid a:hover {
+    background-color: var(--color-gray-100);
+    text-decoration: underline;
+  }
+</style>

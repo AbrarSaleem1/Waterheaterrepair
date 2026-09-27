@@ -114,11 +114,25 @@ const faqSchema = {
     },
   })),
 };
+// High-CTR title strictly under 60-65 characters
+let cityMetaTitle = `Water Heater Repair in ${city.name}, ${state.abbr} | 24/7 Service`;
+if (cityMetaTitle.length > 60) {
+  cityMetaTitle = `Water Heater Repair ${city.name}, ${state.abbr} | 24/7`;
+}
+if (cityMetaTitle.length > 60) {
+  cityMetaTitle = `Water Heater Repair ${city.name}, ${state.abbr}`;
+}
+
+// High-CTR meta description strictly under 155 characters
+let cityMetaDesc = `Need water heater repair in ${city.name}, ${state.abbr}? Licensed 24/7 emergency plumbers. Upfront phone estimates & fast same-day service. Call ${siteConfig.phoneFormatted}!`;
+if (cityMetaDesc.length > 155) {
+  cityMetaDesc = `Water heater repair in ${city.name}, ${state.abbr}. 24/7 licensed emergency plumbers, upfront pricing & same-day service. Call ${siteConfig.phoneFormatted}!`;
+}
 ---
 
 <BaseLayout
-  title={`${seoData.heroTitle} | 24/7 Service | ${siteConfig.businessName}`}
-  description={`Need water heater repair or installation in ${city.name}, ${state.abbr}? Licensed 24/7 emergency plumbers covering zip code${city.zips.length > 1 ? 's' : ''} ${city.zips.slice(0, 3).join(', ')}. Same-day service & upfront phone estimates!`}
+  title={cityMetaTitle}
+  description={cityMetaDesc}
   breadcrumbs={breadcrumbs}
   jsonLd={[citySchema, faqSchema]}
 >
