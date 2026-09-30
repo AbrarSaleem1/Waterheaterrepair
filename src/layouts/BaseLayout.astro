@@ -72,7 +72,7 @@ const breadcrumbSchema = (breadcrumbs && breadcrumbs.length > 0) ? {
     "@type": "ListItem",
     "position": idx + 1,
     "name": crumb.label,
-    ...(crumb.href ? { "item": toCanonicalUrl(crumb.href) } : {})
+    "item": crumb.href ? toCanonicalUrl(crumb.href) : fullCanonical
   }))
 } : null;
 
